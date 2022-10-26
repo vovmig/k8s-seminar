@@ -12,7 +12,7 @@ spec:
    - mountPath: /storage/app1
      name: app-storage
  - name: app2
-   image: bkimminich/juice-shop
+   image: yanivomc/spring-music:latest
    ports: 
    - containerPort: 3000
    volumeMounts:
