@@ -1,21 +1,22 @@
 apiVersion: v1
-kind: Pod
-metadata:
-  name: volume_exc
+kind: Pod 
+metadata: 
+ name: volumes
 spec:
-  containers:
-  - image: supergiantkir/animals:bear
-    name: app1
-    volumeMounts:
-    - mountPath: /storage
-      name: app-storage
-  containers:
-  - image: yanivomc/spring-music:latest
-    name: app2
-    volumeMounts:
-    - mountPath: /storage
-      name: app-storage      
-  volumes:
+ containers: 
+ - name: app1
+   volumeMounts:
+   - name: app-storage
+     mountPath: /storage
+   image: yanivomc/spring-music:latest 
+   ports: 
+ - name: app2
+   volumeMounts:
   - name: app-storage
-    hostPath:
-      path: /tmp/files
+    mountPath: /storage
+   image: supergiantkir/animals:bear
+  
+volumes:
+ - name: app-storage
+   hostPath:
+    path: /tmp/files
