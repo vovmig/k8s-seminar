@@ -1,22 +1,25 @@
 apiVersion: v1
-kind: Pod 
+kind: Pod  
 metadata: 
- name: volumes
+ name: apps 
 spec:
  containers: 
  - name: app1
-   volumeMounts:
-   - name: app-storage
-     mountPath: /storage
-   image: yanivomc/spring-music:latest 
-   ports: 
- - name: app2
-   volumeMounts:
-  - name: app-storage
-    mountPath: /storage
    image: supergiantkir/animals:bear
-  
-volumes:
- - name: app-storage
-   hostPath:
-    path: /tmp/files
+   ports: 
+   - containerPort: 80
+   volumeMounts:
+   - mountPath: /storage/app1
+     name: app-storage
+ - name: app2
+   image: bkimminich/juice-shop
+   ports: 
+   - containerPort: 3000
+   volumeMounts:
+   - mountPath: /storage/app2
+     name: app-storage
+ volumes:
+   - name: app-storage
+     hostPath:
+       path: /tmp/files
+       type: DirectoryOrCreate
