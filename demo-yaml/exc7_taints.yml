@@ -13,7 +13,7 @@ spec:
   tolerations:
     - key: "applications"
       operator: "Exists"
-      effect: "NoSchedule"
+      effect: "NoExecute"
 
 ---
 apiVersion: v1
