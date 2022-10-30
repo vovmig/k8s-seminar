@@ -13,7 +13,6 @@ spec:
   tolerations:
     - key: "applications"
       operator: "Exists"
-      effect: 
 
 ---
 apiVersion: v1
