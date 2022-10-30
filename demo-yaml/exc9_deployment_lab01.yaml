@@ -6,11 +6,11 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 2
+  replicas: 4
   strategy:
         type: RollingUpdate
         rollingUpdate:
-          maxSurge: 5
+          maxSurge: 4
           maxUnavailable: 0
   template: 
     metadata:
