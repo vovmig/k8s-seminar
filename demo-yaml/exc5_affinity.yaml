@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaexcersise
+  labels:
+    app: replica_exc
+spec:
+  replicas: 2
+  selector: 
+    matchLabels:
+      app: replica_exc
+  template:   
+    metadata:
+      labels:
+        app: replica_exc
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                - eu-west-1b
+                - eu-west-1c
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: node.kubernetes.io/instance-type
+                operator: In
+                values:
+                - t3.large
+      containers: 
+      - name: app1
+        image: supergiantkir/animals:bear
+        ports: 
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /storage/app1
+          name: app-storage
+      - name: app2
+        image: yanivomc/spring-music:latest
+        ports: 
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: /storage/app2
+          name: app-storage
+      volumes:
+        - name: app-storage
+          hostPath:
+            path: /tmp/files
+            type: DirectoryOrCreate
