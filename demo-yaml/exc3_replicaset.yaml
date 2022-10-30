@@ -6,10 +6,10 @@ metadata:
     app: replica_exc
 spec:
   replicas: 2
-  selector:  # Using the selector we tell our replicaset which pods to manage
+  selector: 
     matchLabels:
       app: replica_exc
-  template:   # here we define our PODS Specs (k8s uses go template in the background)
+  template:   
     metadata:
       labels:
         app: replica_exc
