@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yaniv-omc
+spec:
+  selector:
+    matchLabels:
+      app: ynomc
+  replicas: 2
+  template: 
+    metadata:
+      labels:
+        app: ynomc
+    spec:
+      containers:
+      - name: yanivomc
+        image: yanivomc/spring-music:latest
+        ports:
+        - containerPort: 8080
