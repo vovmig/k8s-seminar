@@ -17,23 +17,3 @@ spec:
         image: supergiantkir/animals:hare
         ports:
         - containerPort: 80
------------
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: animals
-spec:
-  selector:
-    matchLabels:
-      app: animals
-  replicas: 1
-  template: 
-    metadata:
-      labels:
-        app: animals
-    spec:
-      containers:
-      - name: animals
-        image: supergiantkir/animals:bear
-        ports:
-        - containerPort: 80
