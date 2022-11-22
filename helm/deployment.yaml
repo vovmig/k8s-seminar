@@ -1,24 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  {{ .Release.Name }}-{{ .Chart.name }}-{{ .Chart.version }}
-  labels:
-  {{- include "spring.labels" . | nindent 3}}
+  name: "{{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}"
 spec:
-  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-    {{- include "spring.labels" . | nindent 4}}
+      {{- include "spring.labels" .| nindent 6 }}
+  replicas: {{ .Values.deployment.replicas }}
   template:
     metadata:
       labels:
-      {{- include "spring.labels" . | nindent 5}}
+       {{- include "spring.labels" .| nindent 8 }}
     spec:
       containers:
-        - name: {{ .Values.name }}
-          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
-          imagePullPolicy: IfNotPresent
-          ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
+      - name: {{ .Values.deployment.name }}
+        image: {{ .Values.deployment.image }}
+        ports:
+        - containerPort: 8080
